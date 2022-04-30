@@ -1,0 +1,16 @@
+#title {
+    color: blue;
+}
+p#description {
+    text-align: center;
+}
+.promocao{
+    text-align: center;
+    background-color: yellow;
+}
+p {
+    color: green;
+}
+strong {
+    color: red
+}
