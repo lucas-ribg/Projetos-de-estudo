@@ -9,10 +9,11 @@ const {
   MONGODB_USER,
   MONGODB_PASSWORD,
   MONGODB_CLUSTER,
-  MONGODB_DATABASE
+  MONGODB_DATABASE,
+  MONGODB_ADDRESS,
 } = process.env
 
-mongoose.connect(`mongodb+srv://${MONGODB_USER}:${MONGODB_PASSWORD}@${MONGODB_CLUSTER}.mongodb.net/${MONGODB_DATABASE}?retryWrites=true&w=majority`)
+mongoose.connect(`mongodb+srv://${MONGODB_USER}:${MONGODB_PASSWORD}@${MONGODB_CLUSTER}.${MONGODB_ADDRESS}.mongodb.net/${MONGODB_DATABASE}?retryWrites=true&w=majority`)
 .then(()=>{
   console.log("Conexão Ok")
 }).catch(()=>{
