@@ -6,6 +6,10 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const Cliente = require('./models/cliente');
 
+//aplicação de middlewere
+app.use(bodyParser.json());
+app.use(cors());
+
 const {
   MONGODB_USER,
   MONGODB_PASSWORD,
@@ -21,11 +25,7 @@ mongoose.connect(`mongodb+srv://${MONGODB_USER}:${MONGODB_PASSWORD}@${MONGODB_CL
   console.log("Conexão NOK")
 });
 
-//aplicação de middlewere
-app.use(bodyParser.json());
-app.use(cors());
-
-//http://localhost:3000/api/clientes
+//POST http://localhost:3000/api/clientes
 app.post('/api/clientes', (req, res, next) => {
   const cliente = new Cliente({
     nome:req.body.nome,
@@ -37,11 +37,23 @@ app.post('/api/clientes', (req, res, next) => {
   res.status(201).json({mensagem: 'Cliente inserido'});
 });
 
+//GET http://localhost:3000/api/clientes
 app.get('/api/clientes', (req, res, next) => {
   Cliente.find().then((documents) => {
+    console.log(documents)
     res.status(200).json({
       mensagem: "Tudo OK!",
       clientes: documents
+    })
+  })
+});
+
+//DELETE http://localhost:3000/api/clientes/123456
+app.delete('/api/clientes/:id', (req, res, next) => {
+  Cliente.deleteOne({_id: req.params.id}).then((resultado) => {
+    console.log(resultado);
+    res.status(200).json({
+      mensagem: "Cliente removido!"
     })
   })
 });
