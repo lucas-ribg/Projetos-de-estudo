@@ -1,9 +1,11 @@
 import React from 'react'
+import Imagem from './Imagem'
 
-const ListaImagems = () => {
+const ListaImagens = ({pics, imgStyle}) => {
    return (
       pics.map((pic, key) => (
 			<Imagem 
+				imgStyle={imgStyle}
 				pic={pic.src.small}
 				key={pic.id}
 				alt={pic.alt} 
@@ -12,4 +14,4 @@ const ListaImagems = () => {
    )
 }
 
-export default ListaImagems
+export default ListaImagens
